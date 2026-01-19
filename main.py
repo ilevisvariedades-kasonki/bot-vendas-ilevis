@@ -24,3 +24,12 @@ if __name__ == "__main__":
     Thread(target=run_bot).start()
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
+    if __name__ == "__main__":
+    # 1. Primeiro liga o bot em uma Thread (segundo plano)
+    t = Thread(target=run_bot)
+    t.daemon = True  # Isso garante que ele não trave o servidor
+    t.start()
+    
+    # 2. Depois liga o servidor web
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host='0.0.0.0', port=port)
