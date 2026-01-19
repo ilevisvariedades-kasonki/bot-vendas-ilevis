@@ -19,17 +19,14 @@ def start(message):
 
 def run_bot():
     bot.infinity_polling()
-
-if __name__ == "__main__":
-    Thread(target=run_bot).start()
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
     if __name__ == "__main__":
-    # 1. Primeiro liga o bot em uma Thread (segundo plano)
+    # Garanta que as linhas abaixo tenham 4 espaços de recuo à esquerda
     t = Thread(target=run_bot)
-    t.daemon = True  # Isso garante que ele não trave o servidor
+    t.daemon = True
     t.start()
     
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host='0.0.0.0', port=port)
     # 2. Depois liga o servidor web
     port = int(os.environ.get("PORT", 10000))
     app.run(host='0.0.0.0', port=port)
